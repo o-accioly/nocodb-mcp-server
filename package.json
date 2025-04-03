@@ -7,6 +7,9 @@
     "build": "tsc",
     "start": "tsc && node dist/start.js"
   },
+  "bin": {
+    "nocodb-mcp-server": "dist/start.js"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",
