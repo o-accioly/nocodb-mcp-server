@@ -16,7 +16,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
     "axios": "^1.8.4",
