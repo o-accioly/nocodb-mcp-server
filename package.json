@@ -7,6 +7,9 @@
     "build": "tsc",
     "start": "tsc && node dist/start.js"
   },
+  "files": [
+    "dist"
+  ],
   "bin": {
     "nocodb-mcp-server": "dist/start.js"
   },
@@ -14,9 +17,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "20.14.10",
-    "tsx": "4.16.2",
-    "typescript": "5.5.3"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
