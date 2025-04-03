@@ -10,8 +10,8 @@ This repository is a TypeScript-based fork of [Nocodb-MCP-Server](https://github
 ## Setup
 Ensure that Node.js and TypeScript are installed, then execute:
 ```sh
-pnpm install
-pnpm build
+npm install
+npm run build
 ```
 
 ## Configuration
