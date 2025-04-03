@@ -1,6 +1,6 @@
 {
   "name": "nocodb-mcp-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/start.js",
   "scripts": {
@@ -16,8 +16,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
     "axios": "^1.8.4",
