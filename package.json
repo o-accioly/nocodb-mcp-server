@@ -7,6 +7,7 @@
     "build": "tsc",
     "start": "tsc && node dist/start.js"
   },
+  "type": "module",
   "files": [
     "dist"
   ],
