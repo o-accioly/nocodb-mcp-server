@@ -2,10 +2,9 @@
   "name": "nocodb-mcp-server",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/start.js",
   "scripts": {
-    "build": "tsc",
-    "bot": "tsx src/start.ts"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
