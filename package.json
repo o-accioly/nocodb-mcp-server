@@ -4,8 +4,7 @@
   "description": "",
   "main": "dist/start.js",
   "scripts": {
-    "build": "tsc",
-    "start": "tsc && node dist/start.js"
+    "build": "tsc"
   },
   "type": "module",
   "files": [
