@@ -17,7 +17,6 @@ async function main() {
         async ({tableName}) => {
             const response = await getRecordsNocoDb(tableName)
             return {
-                // content: [response]
                 content: [{
                     type: 'text',
                     mimeType: 'application/json',
