@@ -18,9 +18,42 @@ const nocodbClient: AxiosInstance = axios.create({
     timeout: 30000,
 });
 
-export async function getRecordsNocoDb(tableName: string) {
+export async function getRecords(tableName: string) {
     const tableId = await getTableId(tableName);
     const response = await nocodbClient.get(`/api/v2/tables/${tableId}/records`,);
+    return response.data;
+}
+
+export async function postRecords(tableName: string, data: unknown) {
+    const tableId = await getTableId(tableName);
+    const response = await nocodbClient.post(`/api/v2/tables/${tableId}/records`, data);
+    return {
+        output: response.data,
+        input: data
+    };
+}
+
+export async function patchRecords(tableName: string, rowId: number, data: any) {
+    const tableId = await getTableId(tableName);
+    const newData = [{
+        ...data,
+        "Id": rowId,
+    }]
+
+    const response = await nocodbClient.patch(`/api/v2/tables/${tableId}/records`, newData);
+    return {
+        output: response.data,
+        input: data
+    };
+}
+
+export async function deleteRecords(tableName: string, rowId: number) {
+    const tableId = await getTableId(tableName);
+    const data: any =
+        {
+            "Id": rowId
+        }
+    const response = await nocodbClient.delete(`/api/v2/tables/${tableId}/records`, {data});
     return response.data;
 }
 
@@ -49,7 +82,72 @@ async function main() {
         "Nocodb - Get Records",
         {tableName: z.string()},
         async ({tableName}) => {
-            const response = await getRecordsNocoDb(tableName)
+            const response = await getRecords(tableName)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
+
+    server.tool(
+        "nocodb-post-records",
+        "Nocodb - Post Records",
+        {
+            tableName: z.string().describe("table name"),
+            data: z.any()
+                .describe(`The data to be inserted into the table. 
+[WARNING] The structure of this object should match the columns of the table.
+example:
+const response = await postRecords("Shinobi", {
+        Title: "sasuke"
+})`)
+        },
+        async ({tableName, data}) => {
+            const response = await postRecords(tableName, data)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
+
+
+    server.tool("nocodb-patch-records",
+        "Nocodb - Patch Records",
+        {
+            tableName: z.string(),
+            rowId: z.number(),
+            data: z.any().describe(`The data to be updated in the table.
+[WARNING] The structure of this object should match the columns of the table.
+example:
+const response = await patchRecords("Shinobi", 2, {
+            Title: "sasuke-updated"
+})`)
+        },
+        async ({tableName, rowId, data}) => {
+            const response = await patchRecords(tableName, rowId, data)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
+
+    server.tool("nocodb-delete-records",
+        "Nocodb - Delete Records",
+        {tableName: z.string(), rowId: z.number()},
+        async ({tableName, rowId}) => {
+            const response = await deleteRecords(tableName, rowId)
             return {
                 content: [{
                     type: 'text',
