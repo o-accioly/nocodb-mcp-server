@@ -9,6 +9,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "bin": {
     "nocodb-mcp-server": "dist/start.js"
   },
@@ -21,17 +24,18 @@
   ],
   "author": "edwinbernadus",
   "license": "MIT",
-  "devDependencies": {
-    "typescript": "^5.7.2"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/edwinbernadus/nocodb-mcp-server.git"
   },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "5.8.3"
+  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.8.0",
-    "axios": "^1.8.4",
-    "dotenv": "16.4.5",
-    "zod": "^3.24.2"
+    "@modelcontextprotocol/sdk": "1.8.0",
+    "axios": "1.8.4",
+    "dotenv": "16.4.7",
+    "zod": "3.24.2"
   }
 }

@@ -3,13 +3,14 @@ import {McpServer, ResourceTemplate} from "@modelcontextprotocol/sdk/server/mcp.
 import {StdioServerTransport} from "@modelcontextprotocol/sdk/server/stdio.js";
 import {z} from "zod";
 import axios, {AxiosInstance} from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const {NOCODB_URL, NOCODB_API_TOKEN, NOCODB_BASE_ID} = process.env;
 if (!NOCODB_URL || !NOCODB_API_TOKEN || !NOCODB_BASE_ID) {
     throw new Error("Missing required environment variables");
 }
-
-
 
 
 const filterRules =
@@ -212,7 +213,7 @@ async function main() {
         {
             tableName: z.string(),
             filters: z.string().optional().describe(
-`Example: where=(field1,eq,value1)~and(field2,eq,value2) will filter records where 'field1' is equal to 'value1' AND 'field2' is equal to 'value2'.
+                `Example: where=(field1,eq,value1)~and(field2,eq,value2) will filter records where 'field1' is equal to 'value1' AND 'field2' is equal to 'value2'.
 You can also use other comparison operators like 'ne' (not equal), 'gt' (greater than), 'lt' (less than), and more, to create complex filtering rules.
 ` + " " + filterRules),
             limit: z.number().optional(),
