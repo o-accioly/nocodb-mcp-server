@@ -69,6 +69,15 @@ const getTableId = async (tableName: string): Promise<string> => {
     }
 };
 
+export async function getListTables() {
+    try {
+        const response = await nocodbClient.get(`/api/v2/meta/bases/${NOCODB_BASE_ID}/tables`);
+        const tables = response.data.list || [];
+        return tables.map((t: any) => t.title);
+    } catch (error: any) {
+        throw new Error(`Error get list tables: ${error.message}`);
+    }
+}
 
 // Create an MCP server
 const server = new McpServer({
@@ -92,6 +101,22 @@ async function main() {
             }
         }
     );
+
+    server.tool(
+        "nocodb-get-list-tables",
+        "Nocodb - Get List Tables",
+        {},
+        async () => {
+            const response = await getListTables()
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    )
 
     server.tool(
         "nocodb-post-records",

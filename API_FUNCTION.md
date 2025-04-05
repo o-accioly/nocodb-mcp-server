@@ -33,3 +33,10 @@ const response = await deleteRecords("Shinobi", {
     }
 )
 ```
+
+
+### 5. Get Table Names
+Retrieve the names of all tables in the Nocodb database.
+```typescript
+const tableNames = await getTableNames();
+```
