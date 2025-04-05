@@ -40,6 +40,11 @@ Modify `claude_desktop_config.json` to include:
 }
 ```
 
+## Prompt Example
+```
+read file EXAMPLE_PROMPT.md for examples
+```
+
 ## API Functions
 ### 1. Fetch Records
 Retrieve data from a specified Nocodb table.
