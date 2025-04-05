@@ -22,6 +22,16 @@ NOCODB_API_TOKEN=your_api_token_here
 NOCODB_BASE_ID=your_base_id_here
 ```
 
+### How to Obtain NOCODB_BASE_ID
+To find your `NOCODB_BASE_ID`, check the URL of your Nocodb instance.  
+For example:
+https://app.nocodb.com/#/wi6evls6/pqmob3ammcknma5/maty9c5xkmf4012  
+In this URL format:
+```
+https://app.nocodb.com/#/{USERNAME}/{NOCODB_BASE_ID}/{TABLE_ID}
+```
+
+
 ## Integration with Claude Desktop
 Modify `claude_desktop_config.json` to include:
 ```json
@@ -45,41 +55,11 @@ Modify `claude_desktop_config.json` to include:
 read file EXAMPLE_PROMPT.md for examples
 ```
 
+
 ## API Functions
-### 1. Fetch Records
-Retrieve data from a specified Nocodb table.
-```typescript
-const records = await getRecords("Shinobi");
 ```
-
-### 2. Create Record
-Create a new record in a specified Nocodb table.
-```typescript
-const response = await postRecords("Shinobi", {
-        Title: "sasuke"
-    }
-)
-``` 
-
-### 3. Update Record
-Update an existing record in a specified Nocodb table.
-```typescript
-const response = await updateRecords("Shinobi", {
-        Title: "naruto",
-        id: 1
-    }
-)
+read file API_FUNCTION.md for API functions
 ```
-
-### 4. Delete Record
-Delete a record from a specified Nocodb table.
-```typescript
-const response = await deleteRecords("Shinobi", {
-        id: 1
-    }
-)
-```
-
 
 ## Project Structure
 ```
