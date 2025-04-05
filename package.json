@@ -22,7 +22,6 @@
   "author": "edwinbernadus",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.7.2"
   },
   "repository": {
     "type": "git",
