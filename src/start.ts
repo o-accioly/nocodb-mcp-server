@@ -3,9 +3,6 @@ import {McpServer, ResourceTemplate} from "@modelcontextprotocol/sdk/server/mcp.
 import {StdioServerTransport} from "@modelcontextprotocol/sdk/server/stdio.js";
 import {z} from "zod";
 import axios, {AxiosInstance} from "axios";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const {NOCODB_URL, NOCODB_API_TOKEN, NOCODB_BASE_ID} = process.env;
 if (!NOCODB_URL || !NOCODB_API_TOKEN || !NOCODB_BASE_ID) {
