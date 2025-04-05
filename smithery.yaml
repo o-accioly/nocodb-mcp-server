@@ -3,8 +3,22 @@ startCommand:
   type: stdio
   configSchema:
     # JSON Schema defining the configuration options for the MCP.
-    {
-    }
+    type: object
+    required:
+      - NOCODB_URL
+      - NOCODB_API_TOKEN
+      - NOCODB_BASE_ID
+    properties:
+      NOCODB_URL:
+        type: string
+        description: The URL of the NocoDB instance.
+      NOCODB_API_TOKEN:
+        type: string
+        description: The API token for NocoDB.
+      NOCODB_BASE_ID:
+        type: string
+        description: The base ID for NocoDB.
+
   commandFunction:
     # A function that produces the CLI command to start the MCP on stdio.
     |-
