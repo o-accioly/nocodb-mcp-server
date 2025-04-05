@@ -1,8 +1,7 @@
 {
   "name": "nocodb-mcp-server",
   "version": "1.0.13",
-  "description": "",
-  "main": "dist/start.js",
+  "description": "Model Context Protocol server for nocodb",
   "scripts": {
     "build": "tsc"
   },
@@ -13,11 +12,16 @@
   "bin": {
     "nocodb-mcp-server": "dist/start.js"
   },
-  "keywords": [],
-  "author": "",
+  "homepage": "https://github.com/edwinbernadus/nocodb-mcp-server.git",
+  "keywords": ["nocodb","mcp", "model context protocol", "nocodb mcp"],
+  "author": "edwinbernadus",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edwinbernadus/nocodb-mcp-server.git"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
