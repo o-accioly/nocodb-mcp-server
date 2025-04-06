@@ -4,3 +4,5 @@ dist
 .idea
 .github
 .vscode
+
+src/dev.ts

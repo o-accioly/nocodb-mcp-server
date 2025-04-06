@@ -163,7 +163,7 @@ export async function deleteRecords(tableName: string, rowId: number) {
     return response.data;
 }
 
-const getTableId = async (tableName: string): Promise<string> => {
+export const getTableId = async (tableName: string): Promise<string> => {
     try {
         const response = await nocodbClient.get(`/api/v2/meta/bases/${NOCODB_BASE_ID}/tables`);
         const tables = response.data.list || [];
@@ -184,6 +184,47 @@ export async function getListTables() {
         throw new Error(`Error get list tables: ${error.message}`);
     }
 }
+
+export async function getTableMetadata(tableName: string) {
+    try {
+        const tableId = await getTableId(tableName);
+        const response = await nocodbClient.get(`/api/v2/meta/tables/${tableId}`);
+        return response.data;
+    } catch (error: any) {
+        throw new Error(`Error adding column: ${error.message}`);
+    }
+}
+
+
+// column type
+
+// SingleLineText
+// Number
+// Decimals
+// DateTime
+// Checkbox
+export async function alterTableAddColumn(tableName: string, columnName: string, columnType: string) {
+    try {
+        const tableId = await getTableId(tableName);
+        const response = await nocodbClient.post(`/api/v2/meta/tables/${tableId}/columns`, {
+            title: columnName,
+            uidt: columnType,
+        });
+        return response.data;
+    } catch (error: any) {
+        throw new Error(`Error adding column: ${error.message}`);
+    }
+}
+
+export async function alterTableRemoveColumn(columnId: string) {
+    try {
+        const response = await nocodbClient.delete(`/api/v2/meta/columns/${columnId}`);
+        return response.data;
+    } catch (error: any) {
+        throw new Error(`Error remove column: ${error.message}`);
+    }
+}
+
 
 // Create an MCP server
 const server = new McpServer({
@@ -319,6 +360,62 @@ const response = await patchRecords("Shinobi", 2, {
             }
         }
     );
+
+    server.tool("nocodb-get-table-metadata",
+        "Nocodb - Get Table Metadata",
+        {tableName: z.string()},
+        async ({tableName}) => {
+            const response = await getTableMetadata(tableName)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
+
+    server.tool("nocodb-alter-table-add-column",
+        "Nocodb - Alter Table Add Column",
+        {
+            tableName: z.string(),
+            columnName: z.string(),
+            columnType: z.string().describe("SingleLineText, Number, Decimals, DateTime, Checkbox")
+        },
+        async ({tableName, columnName, columnType}) => {
+            const response = await alterTableAddColumn(tableName, columnName, columnType)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
+
+    server.tool("nocodb-alter-table-remove-column",
+        "Nocodb - Alter Table Remove Column" +
+        " get columnId from getTableMetadata" +
+        " notes: remove column by columnId" +
+        " example: c7uo2ruwc053a3a" +
+        " [WARNING] this action is irreversible" +
+        " [RECOMMENDATION] give warning to user",
+        {columnId: z.string()},
+        async ({columnId}) => {
+            const response = await alterTableRemoveColumn(columnId)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    )
+    ;
+
 
     // Add a dynamic greeting resource
     server.resource(
