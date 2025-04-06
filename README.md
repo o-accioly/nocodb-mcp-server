@@ -44,8 +44,8 @@ Modify `claude_desktop_config.json` to include:
       "args": ["{working_folder}/dist/start.js"],
       "env": {
         "NOCODB_URL": "https://your-nocodb-instance.com",
-        "NOCODB_API_TOKEN": "your_api_token_here",
-        "NOCODB_BASE_ID": "your_base_id_here"
+        "NOCODB_BASE_ID": "your_base_id_here",
+        "NOCODB_API_TOKEN": "your_api_token_here"
       }
     }
   }
@@ -57,14 +57,14 @@ You can directly call the MCP server from the command line:
 NOCODB_URL, NOCOBD_API_TOKEN, and NOCODB_BASE_ID are required parameters.  
 `NOCODB_URL= https://app.nocodb.com` if you are using nocodb cloud.
 ```sh
-npx -y nocodb-mcp-server {NOCODB_URL} {NOCODB_API_TOKEN} {NOCODB_BASE_ID}
+npx -y nocodb-mcp-server {NOCODB_URL} {NOCODB_BASE_ID} {NOCODB_API_TOKEN} 
 ```
 
 
 ## Testing CLI
 To run the tests, execute:
 ```sh
-npx -y @wong2/mcp-cli npx nocodb-mcp-server {NOCODB_URL} {NOCODB_API_TOKEN} {NOCODB_BASE_ID}
+npx -y @wong2/mcp-cli npx nocodb-mcp-server {NOCODB_URL} {NOCODB_BASE_ID} {NOCODB_API_TOKEN} 
 ```
 
 
