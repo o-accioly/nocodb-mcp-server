@@ -3,6 +3,33 @@
 ## Introduction
 The Nocodb MCP Server enables seamless interaction with a Nocodb database using the Model Context Protocol (MCP). It facilitates CRUD (Create, Read, Update, Delete) operations on Nocodb tables.  
 
+
+## EXAMPLE PROMPT
+
+1. Get Records
+```
+get data from nocodb, table: Shinobi
+```
+
+2. Create Record
+```
+add new row, with name: sasuke-2
+```
+
+```
+add other row, with name: naruto-2
+```
+
+3. Update Record
+```
+update all rows, remove suffix -
+```
+
+4. Delete Record
+```
+delete all rows with name naruto
+```
+
 ## About This Fork
 This repository is a TypeScript-based fork of [Nocodb-MCP-Server](https://github.com/granthooks/Nocodb-MCP-Server). It retains the core functionality while improving maintainability and compatibility with modern TypeScript development practices.
 
@@ -66,13 +93,6 @@ To run the tests, execute:
 ```sh
 npx -y @wong2/mcp-cli npx nocodb-mcp-server {NOCODB_URL} {NOCODB_BASE_ID} {NOCODB_API_TOKEN} 
 ```
-
-
-## Prompt Example
-```
-read file EXAMPLE_PROMPT.md for examples
-```
-
 
 ## API Functions
 ```
