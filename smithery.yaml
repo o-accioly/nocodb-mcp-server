@@ -6,18 +6,20 @@ startCommand:
     type: object
     required:
       - NOCODB_URL
-      - NOCODB_API_TOKEN
       - NOCODB_BASE_ID
+      - NOCODB_API_TOKEN
+
     properties:
       NOCODB_URL:
         type: string
         description: The URL of the NocoDB instance.
-      NOCODB_API_TOKEN:
-        type: string
-        description: The API token for NocoDB.
       NOCODB_BASE_ID:
         type: string
         description: The base ID for NocoDB.
+      NOCODB_API_TOKEN:
+        type: string
+        description: The API token for NocoDB.
+
 
   commandFunction:
     # A function that produces the CLI command to start the MCP on stdio.
@@ -29,7 +31,7 @@ startCommand:
       ],
       "env": {
         NOCODB_URL: "${config.NOCODB_URL}",
-        NOCODB_API_TOKEN: "${config.NOCODB_API_TOKEN}",
         NOCODB_BASE_ID:  "${config.NOCODB_BASE_ID}",
+        NOCODB_API_TOKEN: "${config.NOCODB_API_TOKEN}",
       }
     })
