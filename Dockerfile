@@ -12,4 +12,5 @@ RUN npm install
 RUN npm run build
 
 # Command will be provided by smithery.yaml
+#CMD ["tail", "-f", "/dev/null"]
 CMD ["node", "dist/start.js"]
