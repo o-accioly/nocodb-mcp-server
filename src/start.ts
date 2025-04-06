@@ -4,9 +4,16 @@ import {StdioServerTransport} from "@modelcontextprotocol/sdk/server/stdio.js";
 import {z} from "zod";
 import axios, {AxiosInstance} from "axios";
 
-const {NOCODB_URL, NOCODB_API_TOKEN, NOCODB_BASE_ID} = process.env;
-if (!NOCODB_URL || !NOCODB_API_TOKEN || !NOCODB_BASE_ID) {
-    throw new Error("Missing required environment variables");
+let {NOCODB_URL, NOCODB_BASE_ID, NOCODB_API_TOKEN} = process.env;
+if (!NOCODB_URL || !NOCODB_BASE_ID || !NOCODB_API_TOKEN) {
+    // check from npx param input
+    NOCODB_URL = process.argv[2] || NOCODB_URL;
+    NOCODB_BASE_ID = process.argv[3] || NOCODB_BASE_ID;
+    NOCODB_API_TOKEN = process.argv[4] || NOCODB_API_TOKEN;
+
+    if (!NOCODB_URL || !NOCODB_BASE_ID || !NOCODB_API_TOKEN) {
+        throw new Error("Missing required environment variables");
+    }
 }
 
 

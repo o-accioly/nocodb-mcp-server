@@ -14,12 +14,15 @@ npm run build
 ```
 
 ## Configuration
+  
 Define the required environment variables in a `.env` file:
 ```env
 NOCODB_URL=https://your-nocodb-instance.com
 NOCODB_API_TOKEN=your_api_token_here
 NOCODB_BASE_ID=your_base_id_here
 ```
+_tips: duplicate from file env.example_
+
 
 ### How to Obtain NOCODB_BASE_ID
 To find your `NOCODB_BASE_ID`, check the URL of your Nocodb instance.  
