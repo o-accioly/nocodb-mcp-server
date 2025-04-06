@@ -52,6 +52,22 @@ Modify `claude_desktop_config.json` to include:
 }
 ```
 
+## Direct call from CLI
+You can directly call the MCP server from the command line:  
+NOCODB_URL, NOCOBD_API_TOKEN, and NOCODB_BASE_ID are required parameters.  
+`NOCODB_URL= https://app.nocodb.com` if you are using nocodb cloud.
+```sh
+npx nocodb-mcp-server {NOCODB_URL} {NOCODB_API_TOKEN} {NOCODB_BASE_ID}
+```
+
+
+## Testing CLI
+To run the tests, execute:
+```sh
+npx @wong2/mcp-cli npx nocodb-mcp-server {NOCODB_URL} {NOCODB_API_TOKEN} {NOCODB_BASE_ID}
+```
+
+
 ## Prompt Example
 ```
 read file EXAMPLE_PROMPT.md for examples
