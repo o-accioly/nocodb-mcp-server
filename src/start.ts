@@ -225,6 +225,27 @@ export async function alterTableRemoveColumn(columnId: string) {
     }
 }
 
+type ColumnType = "SingleLineText" | "Number" | "Checkbox" | "DateTime";
+type TableColumnType = {
+    title: string;
+    uidt: ColumnType
+}
+
+export async function createTable(tableName: string, data: TableColumnType[]) {
+    try {
+        const response = await nocodbClient.post(`/api/v2/meta/bases/${NOCODB_BASE_ID}/tables`, {
+            title: tableName,
+            columns: data.map((value) => ({
+                title: value.title,
+                uidt: value.uidt,
+            })),
+        });
+        return response.data;
+    } catch (error: any) {
+        throw new Error(`Error creating table: ${error.message}`);
+    }
+}
+
 
 // Create an MCP server
 const server = new McpServer({
@@ -413,8 +434,50 @@ const response = await patchRecords("Shinobi", 2, {
                 }],
             }
         }
-    )
-    ;
+    );
+
+    server.tool("nocodb-create-table",
+        "Nocodb - Create Table",
+        {
+            tableName: z.string(),
+            data: z.array(z.object({
+                title: z.string(),
+                uidt: z.enum(["SingleLineText", "Number", "Checkbox", "DateTime"]).describe("SingleLineText, Number, Checkbox, DateTime")
+
+            }).describe(`The data to be inserted into the table.
+[WARNING] The structure of this object should match the columns of the table.
+example:
+const response = await createTable("Shinobi", [
+        {
+            title: "Name",
+            uidt: "SingleLineText"
+        },
+        {
+            title: "Age",
+            uidt: "Number"
+        },
+        {
+            title: "isHokage",
+            uidt: "Checkbox"
+        },
+        {
+            title: "Birthday",
+            uidt: "DateTime"
+        }
+    ]
+)`))
+        },
+        async ({tableName, data}) => {
+            const response = await createTable(tableName, data)
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(response),
+                }],
+            }
+        }
+    );
 
 
     // Add a dynamic greeting resource
