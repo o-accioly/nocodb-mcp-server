@@ -1,0 +1,62 @@
+[
+  {
+    "shinobiName": "Naruto Uzumaki",
+    "age": 17,
+    "birthday": "October 10, 2000",
+    "isHokage": true
+  },
+  {
+    "shinobiName": "Sasuke Uchiha",
+    "age": 17,
+    "birthday": "July 23, 2000",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Sakura Haruno",
+    "age": 17,
+    "birthday": "March 28, 2001",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Kakashi Hatake",
+    "age": 31,
+    "birthday": "September 15, 1989",
+    "isHokage": true
+  },
+  {
+    "shinobiName": "Shikamaru Nara",
+    "age": 17,
+    "birthday": "September 22, 2000",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Ino Yamanaka",
+    "age": 17,
+    "birthday": "September 23, 2000",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Choji Akimichi",
+    "age": 17,
+    "birthday": "May 1, 2001",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Hinata Hyuga",
+    "age": 16,
+    "birthday": "December 27, 2001",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Neji Hyuga",
+    "age": 18,
+    "birthday": "July 3, 2000",
+    "isHokage": false
+  },
+  {
+    "shinobiName": "Rock Lee",
+    "age": 17,
+    "birthday": "November 27, 2000",
+    "isHokage": false
+  }
+]

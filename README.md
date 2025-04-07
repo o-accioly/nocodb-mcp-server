@@ -30,6 +30,16 @@ update all rows, set Age to 18
 delete column with name: Age
 ```
 
+## Example Prompt - Upload File
+
+```
+[Create table]
+from the json files
+put on nocodb database
+table name is TableShinobi
+```
+json location file in: example_upload.json
+
 ## About This Fork
 
 This repository is a TypeScript-based fork of [Nocodb-MCP-Server](https://github.com/granthooks/Nocodb-MCP-Server). It
