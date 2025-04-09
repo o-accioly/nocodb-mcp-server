@@ -225,7 +225,7 @@ export async function alterTableRemoveColumn(columnId: string) {
     }
 }
 
-type ColumnType = "SingleLineText" | "Number" | "Checkbox" | "DateTime";
+type ColumnType = "SingleLineText" | "Number" | "Checkbox" | "DateTime" | "ID";
 type TableColumnType = {
     title: string;
     uidt: ColumnType
@@ -233,11 +233,21 @@ type TableColumnType = {
 
 export async function createTable(tableName: string, data: TableColumnType[]) {
     try {
+
+        const hasId = data.filter(x => x.title === "Id").length > 0
+        if (!hasId) {
+            // insert at first
+            data.unshift({
+                title: "Id",
+                uidt: "ID"
+            })
+        }
+
         const response = await nocodbClient.post(`/api/v2/meta/bases/${NOCODB_BASE_ID}/tables`, {
             title: tableName,
             columns: data.map((value) => ({
                 title: value.title,
-                uidt: value.uidt,
+                uidt: value.uidt
             })),
         });
         return response.data;
