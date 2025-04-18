@@ -3,6 +3,7 @@ import {McpServer, ResourceTemplate} from "@modelcontextprotocol/sdk/server/mcp.
 import {StdioServerTransport} from "@modelcontextprotocol/sdk/server/stdio.js";
 import {z} from "zod";
 import axios, {AxiosInstance} from "axios";
+import {fork} from "node:child_process";
 
 let {NOCODB_URL, NOCODB_BASE_ID, NOCODB_API_TOKEN} = process.env;
 if (!NOCODB_URL || !NOCODB_BASE_ID || !NOCODB_API_TOKEN) {
@@ -353,6 +354,44 @@ const response = await postRecords("Shinobi", {
     );
 
 
+    server.tool(
+        "nocodb-post-records-bulk",
+        "Nocodb - Post Records Multiple Records",
+        {
+            tableName: z.string().describe("table name"),
+            uploadItems: z.array(z.object({
+                data: z.any()
+                    .describe(`The data to be inserted into the table. 
+[WARNING] The structure of this object should match the columns of the table.
+example:
+const response = await postRecords("Shinobi", {
+        Title: "sasuke"
+})`)
+            })).describe("array of data to be inserted into the table")
+        },
+        async ({tableName, uploadItems}) => {
+            const responses: any[] = [];
+            for (const item of uploadItems) {
+                const data = item.data;
+                if (!data) {
+                    throw new Error("Data is required");
+                }
+                const response = await postRecords(tableName, data)
+                responses.push(response);
+            }
+
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(responses),
+                }],
+            }
+        }
+    )
+    ;
+
+
     server.tool("nocodb-patch-records",
         "Nocodb - Patch Records",
         {
@@ -490,7 +529,7 @@ const response = await createTable("Shinobi", [
     );
 
 
-    // Add a dynamic greeting resource
+// Add a dynamic greeting resource
     server.resource(
         "greeting",
         new ResourceTemplate("greeting://{name}", {list: undefined}),
