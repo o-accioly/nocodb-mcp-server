@@ -44,9 +44,10 @@ json location file in: example_upload.json
 
 ## Example Prompt - Bulk Create Records and Bulk Delete Records
 
-```
-check the screenshot inside /docs/sample-bulk
-```
+
+![bulk_sample1](https://raw.githubusercontent.com/edwinbernadus/nocodb-mcp-server/refs/heads/main/docs/sample-bulk/bulk-screen1.png)
+![bulk_sample2](https://raw.githubusercontent.com/edwinbernadus/nocodb-mcp-server/refs/heads/main/docs/sample-bulk/bulk-screen2.png)
+![bulk_sample3](https://raw.githubusercontent.com/edwinbernadus/nocodb-mcp-server/refs/heads/main/docs/sample-bulk/bulk-screen3.png)
 
 ## About This Fork
 
