@@ -431,6 +431,35 @@ const response = await patchRecords("Shinobi", 2, {
         }
     );
 
+    server.tool("nocodb-delete-records-bulk",
+        "Nocodb - Delete Records Multiple Records",
+        {
+            tableName: z.string().describe("table name"),
+            deleteRowsId: z.array(z.object({
+                rowId: z.number()
+            })).describe("array of data to be deleted from the table")
+        },
+        async ({tableName, deleteRowsId}) => {
+            const responses: any[] = [];
+            for (const item of deleteRowsId) {
+                const rowId = item.rowId;
+                if (!rowId) {
+                    throw new Error("Data is required");
+                }
+                const response = await deleteRecords(tableName, rowId)
+                responses.push(response);
+            }
+
+            return {
+                content: [{
+                    type: 'text',
+                    mimeType: 'application/json',
+                    text: JSON.stringify(responses),
+                }],
+            }
+        }
+    );
+
     server.tool("nocodb-get-table-metadata",
         "Nocodb - Get Table Metadata",
         {tableName: z.string()},

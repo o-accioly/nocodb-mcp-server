@@ -42,6 +42,12 @@ table name is TableShinobi
 ```
 json location file in: example_upload.json
 
+## Example Prompt - Bulk Create Records and Bulk Delete Records
+
+```
+check the screenshot inside /docs/sample-bulk
+```
+
 ## About This Fork
 
 This repository is a TypeScript-based fork of [Nocodb-MCP-Server](https://github.com/granthooks/Nocodb-MCP-Server). It
