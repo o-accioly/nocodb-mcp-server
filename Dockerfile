@@ -14,4 +14,4 @@ RUN npm install
 EXPOSE 3000
 
 # Comando para iniciar o MCP Server
-CMD ["npm", "run", "build"]
+CMD ["node", "server.js"]
