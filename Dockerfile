@@ -1,15 +1,17 @@
-FROM node:18
+# Usa imagem oficial Node.js
+FROM node:18-alpine
 
+# Define diretório de trabalho
 WORKDIR /app
 
-COPY package*.json ./
-
-RUN npm install || (cat npm-debug.log && exit 1)
-
+# Copia os arquivos do projeto
 COPY . .
 
-RUN npm run build || (cat npm-debug.log && exit 1)
+# Instala dependências
+RUN npm install
 
+# Expõe a porta padrão do MCP
 EXPOSE 3000
 
-CMD [ "sh" ]
+# Comando para iniciar o MCP Server
+CMD ["npm", "start"]
