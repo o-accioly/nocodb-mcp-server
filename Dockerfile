@@ -1,17 +1,20 @@
-# Usa imagem oficial Node.js
+# Imagem base com Node e npm
 FROM node:18-alpine
 
 # Define diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos do projeto
+# Copia arquivos do projeto
 COPY . .
 
-# Instala dependências
-RUN npm install
+# Instala dependências e TypeScript
+RUN npm install && npm install -g typescript
+
+# Compila o código TypeScript para JavaScript
+RUN tsc
 
 # Expõe a porta padrão do MCP
 EXPOSE 3000
 
-# Comando para iniciar o MCP Server
-CMD ["node", "server.js"]
+# Roda o código compilado
+CMD ["node", "dist/index.js"]
