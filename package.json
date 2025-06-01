@@ -3,7 +3,8 @@
   "version": "1.0.23",
   "description": "Model Context Protocol server for nocodb",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/start.js"
   },
   "type": "module",
   "files": [
