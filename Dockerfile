@@ -12,4 +12,4 @@ RUN npm run build || (cat npm-debug.log && exit 1)
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD [ "sh" ]
