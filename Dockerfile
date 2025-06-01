@@ -1,20 +1,27 @@
-# Imagem base com Node e npm
-FROM node:18-alpine
+# Etapa 1: build
+FROM node:18-alpine AS build
 
-# Define diretório de trabalho
 WORKDIR /app
 
 # Copia arquivos do projeto
 COPY . .
 
-# Instala dependências e TypeScript
-RUN npm install && npm install -g typescript
+# Instala dependências e o TypeScript local (sem precisar do global)
+RUN npm install
 
-# Compila o código TypeScript para JavaScript
-RUN tsc
+# Compila o código (usa o tsc local da node_modules)
+RUN npx tsc
 
-# Expõe a porta padrão do MCP
+# Etapa 2: execução
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copia apenas os arquivos compilados e dependências de produção
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json ./
+COPY --from=build /app/node_modules ./node_modules
+
 EXPOSE 3000
 
-# Roda o código compilado
 CMD ["node", "dist/index.js"]
